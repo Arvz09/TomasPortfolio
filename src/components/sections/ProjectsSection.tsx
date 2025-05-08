@@ -42,9 +42,9 @@ export default function ProjectsSection() {
     },
     {
       id: 3,
-      title: "Banking API",
+      title: "Di pa nga nalalagay ngaa niii",
       description:
-        "A secure RESTful API for banking operations with comprehensive documentation and test coverage.",
+        "Di pa nga nalalagay ngaa niii",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
       technologies: ["Node.js", "Express", "MySQL", "JWT", "Jest"],
       category: ["backend"],
@@ -53,9 +53,9 @@ export default function ProjectsSection() {
     },
     {
       id: 4,
-      title: "Blog Platform",
+      title: "Di pa nga nalalagay ngaa niii",
       description:
-        "A modern blog platform with a rich text editor, tagging system, and user engagement features.",
+        "Di pa nga nalalagay ngaa niii",
       image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643",
       technologies: ["React", "Next.js", "Tailwind CSS", "MongoDB"],
       category: ["fullstack", "frontend"],
