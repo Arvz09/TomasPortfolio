@@ -8,7 +8,7 @@ I'm a recent graduate with a BS in Information Technology from De La Salle Unive
 
 I help startups and small businesses grow through software solutions. My focus is on creating efficient, user-friendly applications with clean, maintainable code.
 
-**Currently:** Junior Full-Stack Developer at B1G Corporation
+**Currently:** Junior Full-Stack Developer
 
 ## 🛠️ Tech Stack
 
