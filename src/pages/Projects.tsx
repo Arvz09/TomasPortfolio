@@ -18,14 +18,18 @@ export default function Projects() {
       description: "Developed a custom appointment scheduling system for Pet Crossing Animal Clinic to streamline client bookings and manage veterinary appointments efficiently. The system allows pet owners to select available dates and times, input pet details, and receive confirmation notifications.",
       link: "https://pet-crossing-clinic.vercel.app/",
       linkText: "pet-crossing-clinic.vercel.app",
-      image: "Petcrossing.png",
     },
     {
       title: "B1G Corporation",
       description: "Developed the official website for B1G Corporation, a distribution company based in the Philippines. The site offers a streamlined user experience, featuring product showcases, company information, and partner opportunities.",
       link: "https://www.b1gcorporation.com/",
       linkText: "b1gcorporation.com",
-      image: "B1gcorp.png",
+    },
+    {
+      title: "B1G Corporation Mobile Sales",
+      description: "Built a B2B mobile sales ordering system for B1G Corporation's distribution network. The platform enables sales representatives to place orders, track inventory, and manage client accounts on the go. Features include secure authentication, real-time order processing, and a streamlined mobile-first interface.",
+      link: "https://b1-g-ordering-system.vercel.app/login",
+      linkText: "b1g-ordering-system.vercel.app",
     },
   ];
 
