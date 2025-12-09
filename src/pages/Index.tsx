@@ -230,7 +230,7 @@ export default function Index() {
               </h2>
               <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
                 <p>
-                  I'm a fresh graduate and full-stack developer specializing in building solutions with{" "}
+                  I'm a graduate and full-stack developer specializing in building solutions with{" "}
                   <span className="text-foreground font-medium">JavaScript</span>, <span className="text-foreground font-medium">TypeScript</span>, and{" "}
                   <span className="text-foreground font-medium">React</span>. I work on projects including building modern web 
                   applications, responsive designs, and RESTful APIs.
@@ -336,7 +336,7 @@ export default function Index() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-background/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-20 h-20 bg-background/5 rounded-full translate-y-1/2 -translate-x-1/2" />
                 
-                <p className="text-xs font-medium opacity-90 relative z-10">🎓 FRESH GRADUATE</p>
+                <p className="text-xs font-medium opacity-90 relative z-10">🎓 GRADUATE</p>
                 <p className="text-2xl font-bold relative z-10">CLASS OF 2025</p>
                 <p className="text-xs opacity-80 relative z-10 mt-1">De La Salle University - Dasmariñas</p>
                 <p className="text-xs opacity-60 relative z-10">BS Information Technology • Web Development</p>
