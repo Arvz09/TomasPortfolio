@@ -1,63 +1,36 @@
-# Arbie Tomas - Portfolio Website
+# Hi, I'm Arbie Tomas 👋
 
-A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS.
+**Junior Full Stack Developer** based in Cavite, Philippines
 
-## Features
+I'm a recent graduate with a BS in Information Technology from De La Salle University - Dasmariñas (Class of 2025), specializing in Web Development. I build modern web applications using JavaScript, TypeScript, and React.
 
-- 🎨 Modern and clean design
-- 📱 Fully responsive
-- 🌙 Dark/Light mode
-- ⚡ Fast and optimized performance
-- 🎯 SEO friendly
-- 🚀 Built with React and TypeScript
-- 💅 Styled with Tailwind CSS
+## 💼 What I Do
 
-## Tech Stack
+I help startups and small businesses grow through software solutions. My focus is on creating efficient, user-friendly applications with clean, maintainable code.
 
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Vite
-- Shadcn/ui
+**Currently:** Junior Full-Stack Developer at B1G Corporation
 
-## Getting Started
+## 🛠️ Tech Stack
 
-1. Clone the repository
-```bash
-git clone https://github.com/Arvz09/portfolio.git
-```
+**Frontend:** JavaScript • TypeScript • React • Next.js • Tailwind CSS
 
-2. Install dependencies
-```bash
-cd portfolio/frontend
-npm install
-```
+**Backend:** Node.js • Express • REST API • GraphQL • JWT
 
-3. Start the development server
-```bash
-npm run dev
-```
+**DevOps & Cloud:** Git • Vercel • Render • GitHub Actions
 
-4. Build for production
-```bash
-npm run build
-```
+## 🚀 Featured Projects
 
-## Project Structure
+| Project | Description | Link |
+|---------|-------------|------|
+| **Pet Crossing Clinic** | Appointment scheduling for veterinary clinic | [Visit](https://pet-crossing-clinic.vercel.app/) |
+| **B1G Corporation** | Official website for distribution company | [Visit](https://www.b1gcorporation.com/) |
 
-```
-frontend/
-├── src/
-│   ├── components/
-│   │   ├── sections/
-│   │   └── ui/
-│   ├── lib/
-│   └── main.tsx
-├── public/
-└── index.html
-```
+## 📫 Let's Connect
 
-## License
+- **Email:** arbietomas@gmail.com
+- **LinkedIn:** [linkedin.com/in/arbietomas](https://www.linkedin.com/in/arbietomas/)
+- **GitHub:** [github.com/Arvz09](https://github.com/Arvz09)
 
-MIT License - feel free to use this code for your own portfolio!
+---
+
+*"Building the web, one line of code at a time."*
