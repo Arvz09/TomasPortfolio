@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+// @ts-ignore - Vercel types are available at runtime
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 // Create transporter using environment variables
 const createTransporter = () => {
@@ -13,42 +15,45 @@ const createTransporter = () => {
   });
 };
 
-export default async function handler(req: Request) {
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   // Only allow POST requests
   if (req.method !== "POST") {
-    return new Response(
-      JSON.stringify({ error: "Method not allowed" }),
-      { status: 405, headers: { "Content-Type": "application/json" } }
-    );
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, message } = req.body;
 
     // Validation
     if (!name || !email || !message) {
-      return new Response(
-        JSON.stringify({ error: "All fields are required" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
-      );
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return new Response(
-        JSON.stringify({ error: "Invalid email address" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
-      );
+      return res.status(400).json({ error: "Invalid email address" });
     }
 
     // Check if SMTP credentials are configured
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.error("SMTP credentials not configured");
-      return new Response(
-        JSON.stringify({ error: "Email service not configured" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
-      );
+      return res.status(500).json({ 
+        error: "Email service not configured. Please check environment variables." 
+      });
     }
 
     // Create transporter
@@ -86,19 +91,22 @@ ${message}
       `,
     });
 
-    return new Response(
-      JSON.stringify({ 
-        success: true, 
-        messageId: info.messageId 
-      }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
-    );
-  } catch (error) {
+    return res.status(200).json({ 
+      success: true, 
+      messageId: info.messageId 
+    });
+  } catch (error: any) {
     console.error("Email error:", error);
-    return new Response(
-      JSON.stringify({ error: "Failed to send email. Please try again later." }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    
+    // Provide more detailed error information
+    const errorMessage = error?.message || "Failed to send email. Please try again later.";
+    const errorCode = error?.code || "UNKNOWN_ERROR";
+    
+    return res.status(500).json({ 
+      error: "Failed to send email. Please try again later.",
+      details: process.env.NODE_ENV === "development" ? errorMessage : undefined,
+      code: process.env.NODE_ENV === "development" ? errorCode : undefined
+    });
   }
 }
 

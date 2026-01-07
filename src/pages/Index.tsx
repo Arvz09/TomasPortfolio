@@ -86,6 +86,14 @@ export default function Index() {
         }),
       });
 
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error("Non-JSON response:", text);
+        throw new Error("Server returned an invalid response. Please check your serverless function configuration.");
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -94,9 +102,10 @@ export default function Index() {
 
       toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Email error:", error);
-      toast.error("Failed to send message. Please try again or email me directly.");
+      const errorMessage = error?.message || "Failed to send message. Please try again or email me directly.";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
