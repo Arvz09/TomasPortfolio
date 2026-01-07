@@ -5,11 +5,11 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function TechStack() {
   const techStack = {
-    Frontend: ["JavaScript", "TypeScript", "React", "Next.js", "Vue.js", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap"],
+    Frontend: ["JavaScript", "TypeScript", "React", "Vue.js", "HTML5", "CSS3", "Tailwind CSS"],
     Backend: ["Node.js", "Express.js", "REST API", "GraphQL", "JWT", "OAuth", "WebSockets"],
     Database: ["MongoDB", "MySQL", "PostgreSQL", "Supabase"],
-    "DevOps & Cloud": ["Git", "GitHub Actions", "Vercel", "Render", "Docker", "AWS"],
-    Tools: ["VS Code", "Postman", "Figma", "npm", "Vite"],
+    "DevOps & Cloud": ["Git", "GitHub Actions", "Vercel", "Render"],
+    Tools: ["VS Code", "Postman", "npm", "Vite"],
   };
 
   const container = {
