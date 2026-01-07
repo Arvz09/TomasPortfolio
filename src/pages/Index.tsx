@@ -1,13 +1,20 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Send, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User } from "lucide-react";
+import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Send, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function Index() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   
   // Typing effect for role
   const roles = ["Junior Full Stack Developer", "React Enthusiast","Junior Full Stack Developer", "Problem Solver",  "Junior Full Stack Developer"];
@@ -46,6 +53,63 @@ export default function Index() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Email error:", error);
+      toast.error("Failed to send message. Please try again or email me directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   // Experience data
@@ -489,9 +553,7 @@ export default function Index() {
               <div>
                 <p className="text-sm font-medium mb-4">Send me a message</p>
                 <form 
-                  action="mailto:arbietomas@gmail.com" 
-                  method="GET" 
-                  encType="text/plain"
+                  onSubmit={handleSubmit}
                   className="space-y-4"
                 >
                   <div>
@@ -502,8 +564,12 @@ export default function Index() {
                       type="text"
                       id="name"
                       name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="John Doe"
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -514,8 +580,12 @@ export default function Index() {
                       type="email"
                       id="email"
                       name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="john@example.com"
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   <div>
@@ -524,15 +594,32 @@ export default function Index() {
                     </label>
                     <textarea
                       id="message"
-                      name="body"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
                       rows={4}
                       placeholder="Hi Arbie, I'd like to discuss..."
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all resize-none"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
-                  <Button type="submit" className="w-full rounded-lg gap-2">
-                    <Send className="h-4 w-4" />
-                    Send Email
+                  <Button 
+                    type="submit" 
+                    className="w-full rounded-lg gap-2"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Send Email
+                      </>
+                    )}
                   </Button>
                 </form>
               </div>
