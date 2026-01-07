@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User } from "lucide-react";
+import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -189,6 +189,15 @@ export default function Index() {
                     <Github className="h-4 w-4" />
                     GitHub
                   </a>
+                </Button>
+
+                <Button 
+                  variant="outline" 
+                  className="rounded-full gap-2"
+                  onClick={() => window.open("/Tomas_Resume.pdf", "_blank")}
+                >
+                  <FileText className="h-4 w-4" />
+                  View Resume
                 </Button>
               </motion.div>
             </div>
