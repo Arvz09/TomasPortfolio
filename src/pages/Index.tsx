@@ -1,20 +1,13 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Send, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User, Loader2 } from "lucide-react";
+import { MapPin, Calendar, Mail, ExternalLink, ChevronRight, BadgeCheck, Users, Trophy, Award, Github, Linkedin, Circle, Code2, Quote, ArrowUp, Layers, Coffee, FolderKanban, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 export default function Index() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
   
   // Typing effect for role
   const roles = ["Junior Full Stack Developer", "React Enthusiast","Junior Full Stack Developer", "Problem Solver",  "Junior Full Stack Developer"];
@@ -53,72 +46,6 @@ export default function Index() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    // Validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      toast.error("Please enter a valid email address");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      });
-
-      // Check if response is JSON
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await response.text();
-        console.error("Non-JSON response:", text);
-        throw new Error("Server returned an invalid response. Please check your serverless function configuration.");
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to send message");
-      }
-
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error: any) {
-      console.error("Email error:", error);
-      const errorMessage = error?.message || "Failed to send message. Please try again or email me directly.";
-      toast.error(errorMessage);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
   // Experience data
@@ -508,129 +435,51 @@ export default function Index() {
               <Mail className="h-4 w-4" /> Get in Touch
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Left - Socials */}
-              <div>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Available for collaborations, freelance projects, and full-time opportunities.
-                </p>
-                <div className="space-y-3">
-                  <a
-                    href="https://www.linkedin.com/in/arbietomas/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
-                  >
-                    <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
-                      <Linkedin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">LinkedIn</p>
-                      <p className="text-xs text-muted-foreground">Connect with me</p>
-                    </div>
-                  </a>
-                  <a
-                    href="https://github.com/Arvz09"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
-                  >
-                    <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
-                      <Github className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">GitHub</p>
-                      <p className="text-xs text-muted-foreground">Check out my code</p>
-                    </div>
-                  </a>
-                  <a
-                    href="mailto:arbietomas@gmail.com"
-                    className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
-                  >
-                    <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">Email</p>
-                      <p className="text-xs text-muted-foreground">arbietomas@gmail.com</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-              {/* Right - Contact Form */}
-              <div>
-                <p className="text-sm font-medium mb-4">Send me a message</p>
-                <form 
-                  onSubmit={handleSubmit}
-                  className="space-y-4"
+            <div>
+              <p className="text-sm text-muted-foreground mb-6">
+                Available for collaborations, freelance projects, and full-time opportunities.
+              </p>
+              <div className="space-y-3">
+                <a
+                  href="https://www.linkedin.com/in/arbietomas/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
                 >
-                  <div>
-                    <label htmlFor="name" className="text-xs text-muted-foreground mb-1.5 block">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="John Doe"
-                      required
-                      disabled={isSubmitting}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    />
+                  <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
+                    <Linkedin className="h-5 w-5" />
                   </div>
                   <div>
-                    <label htmlFor="email" className="text-xs text-muted-foreground mb-1.5 block">
-                      Your Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="john@example.com"
-                      required
-                      disabled={isSubmitting}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    />
+                    <p className="text-sm font-medium">LinkedIn</p>
+                    <p className="text-xs text-muted-foreground">Connect with me</p>
+                  </div>
+                </a>
+                <a
+                  href="https://github.com/Arvz09"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
+                >
+                  <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
+                    <Github className="h-5 w-5" />
                   </div>
                   <div>
-                    <label htmlFor="message" className="text-xs text-muted-foreground mb-1.5 block">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      placeholder="Hi Arbie, I'd like to discuss..."
-                      required
-                      disabled={isSubmitting}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground/30 transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
-                    />
+                    <p className="text-sm font-medium">GitHub</p>
+                    <p className="text-xs text-muted-foreground">Check out my code</p>
                   </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full rounded-lg gap-2"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4" />
-                        Send Email
-                      </>
-                    )}
-                  </Button>
-                </form>
+                </a>
+                <a
+                  href="mailto:arbietomas@gmail.com"
+                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-foreground/30 hover:bg-secondary/50 transition-all group"
+                >
+                  <div className="p-2 rounded-lg bg-secondary group-hover:bg-foreground/5 transition-colors">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Email</p>
+                    <p className="text-xs text-muted-foreground">arbietomas@gmail.com</p>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
