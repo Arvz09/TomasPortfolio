@@ -22,7 +22,7 @@ export default function Projects() {
     {
       title: "B1G Corporation",
       description: "Developed the official website for B1G Corporation, a distribution company based in the Philippines. The site offers a streamlined user experience, featuring product showcases, company information, and partner opportunities.",
-      link: "https://www.b1gcorporation.com/",
+      link: "https://b1gcorporation.com/",
       linkText: "b1gcorporation.com",
     },
     {
