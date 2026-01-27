@@ -31,6 +31,12 @@ export default function Projects() {
       link: "https://b1-g-ordering-system.vercel.app/login",
       linkText: "b1g-ordering-system.vercel.app",
     },
+    {
+      title: "Marcimetzger Assignment",
+      description: "I made this site for a job assessment. This project demonstrates my ability to build responsive web applications and showcases my technical skills in modern web development.",
+      link: "https://marcimetzger-assignment.vercel.app/",
+      linkText: "marcimetzger-assignment.vercel.app",
+    },
   ];
 
   const container = {
