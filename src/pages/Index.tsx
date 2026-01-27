@@ -194,7 +194,7 @@ export default function Index() {
                 <Button 
                   variant="outline" 
                   className="rounded-full gap-2"
-                  onClick={() => window.open("/Tomas_Resume.pdf", "_blank")}
+                  onClick={() => window.open("/Tomas_Arbie_Resume.pdf", "_blank")}
                 >
                   <FileText className="h-4 w-4" />
                   View Resume
