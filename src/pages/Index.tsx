@@ -10,7 +10,7 @@ export default function Index() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   
   // Typing effect for role
-  const roles = ["Junior Full Stack Developer", "React Enthusiast","Junior Full Stack Developer", "Problem Solver",  "Junior Full Stack Developer"];
+  const roles = ["Full Stack Developer", "React Enthusiast","Full Stack Developer", "Problem Solver",  "Full Stack Developer"];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayedRole, setDisplayedRole] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -49,10 +49,10 @@ export default function Index() {
   };
 
   // Experience data
-  const experiences = [
-    { title: "Junior Full-Stack Developer", company: "B1G Corporation", year: "2025", current: true },
-    { title: "Web Development Intern", company: "B1G Corporation", year: "2025" },
-    { title: "BS Information Technology", company: "De La Salles University - Dasmariñas", year: "2025" },
+  const experiences: { title: string; company: string; year: string; current?: boolean }[] = [
+    { title: "Full-Stack Developer", company: "B1G Corporation", year: "June 2025 – April 2026" },
+    { title: "Web Development Intern", company: "B1G Corporation", year: "Jan 2025 – May 2025" },
+    { title: "BS Information Technology", company: "De La Salles University - Dasmariñas", year: "Aug 2021 – July 2025" },
   ];
 
   // Tech stack data
@@ -194,7 +194,7 @@ export default function Index() {
                 <Button 
                   variant="outline" 
                   className="rounded-full gap-2"
-                  onClick={() => window.open("/Tomas_Arbie_Resume.pdf", "_blank")}
+                  onClick={() => window.open("/Tomas_Arbie.pdf", "_blank")}
                 >
                   <FileText className="h-4 w-4" />
                   View Resume

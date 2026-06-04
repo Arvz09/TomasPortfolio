@@ -26,6 +26,12 @@ export default function Projects() {
       linkText: "b1gcorporation.com",
     },
     {
+      title: "ATS Friendly Resume Builder",
+      description: "Developed a resume builder for job seekers with live preview, ATS scoring and recommendations, shareable compressed resume links, and one-click PDF export optimized for ATS parsing.",
+      link: "https://atresume.vercel.app/",
+      linkText: "Arvz Resume Builder",
+    },
+    {
       title: "B1G Corporation Mobile Sales",
       description: "Built a B2B mobile sales ordering system for B1G Corporation's distribution network. The platform enables sales representatives to place orders, track inventory, and manage client accounts on the go. Features include secure authentication, real-time order processing, and a streamlined mobile-first interface.",
       link: "https://b1-g-ordering-system.vercel.app/login",
